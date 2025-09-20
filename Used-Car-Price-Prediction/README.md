@@ -52,7 +52,6 @@ The project follows the CRISP-DM framework to ensure a structured and systematic
 ---
 
 ## Key Findings
-
 Based on the Lasso regression model, the following key factors significantly impact a used car's price:
 
 * **Age is the biggest factor:** The age of a car is the single most important predictor of its price. A non-linear relationship is discovered where price depreciates quickly for new cars, but the rate of depreciation slows down for older cars.
@@ -66,16 +65,50 @@ Based on the Lasso regression model, the following key factors significantly imp
 
 The final model is a **Lasso regression model**, which outperformed a Ridge regression model on this dataset.
 
-| Model | Test R-squared | Test MAE |
-| :--- | :--- | :--- |
-| **Lasso** | **0.69** | **$5,152** |
-| Ridge | 0.48 | $7,163 |
+![Ridge vs Lasso comparison](images/ridge_vs_lasso_split.png)
 
-* **R-squared (0.69):** The model can explain approximately 69% of the variability in used car prices.
-* **Mean Absolute Error (MAE):** The model's price predictions are, on average, within **$5,152** of the actual car price.
+The plots comparing the performance of your Lasso and Ridge visually demonstrate why the **Lasso** model was the better choice for this project.
 
+### **Model Performance Comparison**
+
+* The **Mean Absolute Error (MAE)** chart shows that the Lasso model's predictions are, on average, over **$2,000 closer** to the actual price of a car than the Ridge model's predictions. This is a significant difference for the dealership.
+* The **R-squared** chart confirms that the Lasso model (0.69) explains **more of the variance** in car prices than the Ridge model (0.48), making it a more reliable and powerful tool for prediction.
 ---
+I recommend placing the coefficient graph in the **"Key Price Drivers"** section of your report. This section is where you translate the technical findings of your model into actionable business insights. The graph provides a perfect visual summary of these insights.
 
+Here is a sample write-up you can use to introduce the graph.
+
+***
+
+## Key Price Drivers
+
+### The Coefficient Chart: 
+While the overall model performance metrics are strong, the true value of this analysis lies in understanding **what** the model learned. The Lasso model's ability to select the most important features allows us to pinpoint the specific factors that have the biggest impact on a car's price.
+
+The chart below visualizes the coefficients for each feature. The length of each bar indicates how much a feature influences the price, while the direction (left or right) shows whether it increases or decreases the price. This plot is a powerful tool for inventory and pricing decisions.
+
+* **The Biggest "Price Killers":** As expected, the two largest negative factors are a car's **age** and **odometer reading**. The model's coefficients confirm that these are the most significant depreciation factors.
+* **The "Price Boosters":** Conversely, certain vehicle types and conditions have a strong positive effect. For instance, a car's `type_convertible` has a positive coefficient, indicating that these vehicles command a premium in the used car market.
+* **The Non-Linear Story:** The presence of both `age` and `age^2` with opposing coefficients perfectly captures the non-linear depreciation curve, showing a sharp initial drop in value that flattens out over time.
+
+![Key Pricing Factors](images/vehicles_price_affecting_features.jpg)
+
+***
+
+### Age: The Relationship to Price
+
+Age is the single most influential factor in a vehicle's price, and the relationship is a non-linear one. A simple linear model would fail to accurately capture the true dynamics of automotive depreciation. To address this, the model incorporates a quadratic term (`age^2`), which allows it to model a more complex and realistic depreciation curve.
+
+The scatter plot below visually demonstrates this relationship and provides validation for the model's structure.
+
+* **Initial Depreciation:** For new vehicles, a steep decline in price is observed. This rapid depreciation is common in the automotive market, as vehicles lose significant value in their first few years of service.
+* **Decelerating Depreciation:** As a vehicle ages, the rate of depreciation decelerates, and the price curve begins to flatten. This indicates that older vehicles lose value at a slower rate than newer ones.
+* **Appreciation for Vintage Vehicles:** For the oldest segment of the data, the model correctly identifies a subtle positive trend. This phenomenon is likely due to the presence of classic and collector's cars, which can appreciate in value over time.
+
+This analysis not only confirms the validity of the `age^2` feature but also provides a clear, data-driven explanation of the complex relationship between a vehicle's age and its market price.
+
+![Car Price Age Relationship](images/car_price_vs_age.jpg)
+---
 ## Recommendations for the Dealership
 
 Based on these findings, the following recommendations are provided:

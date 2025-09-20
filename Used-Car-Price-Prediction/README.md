@@ -69,16 +69,10 @@ The final model is a **Lasso regression model**, which outperformed a Ridge regr
 
 The plots comparing the performance of your Lasso and Ridge visually demonstrate why the **Lasso** model was the better choice for this project.
 
-### **Model Performance Comparison**
+### Model Performance Comparison:
 
 * The **Mean Absolute Error (MAE)** chart shows that the Lasso model's predictions are, on average, over **$2,000 closer** to the actual price of a car than the Ridge model's predictions. This is a significant difference for the dealership.
 * The **R-squared** chart confirms that the Lasso model (0.69) explains **more of the variance** in car prices than the Ridge model (0.48), making it a more reliable and powerful tool for prediction.
----
-I recommend placing the coefficient graph in the **"Key Price Drivers"** section of your report. This section is where you translate the technical findings of your model into actionable business insights. The graph provides a perfect visual summary of these insights.
-
-Here is a sample write-up you can use to introduce the graph.
-
-***
 
 ## Key Price Drivers
 

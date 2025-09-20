@@ -91,7 +91,7 @@ The chart below visualizes the coefficients for each feature. The length of each
 
 ### Age vs. Price: A Non-Linear Relationship
 
-Age is the most significant factor affecting used car prices, and its impact is non-linear. To model this accurately, a quadratic term (age²) was included, capturing the true shape of the depreciation curve.
+Age is the most significant factor affecting used car prices, and its impact is non-linear. To model this accurately, a quadratic term `age^2` was included, capturing the true shape of the depreciation curve.
 
 **Rapid Early Depreciation:** New cars lose value quickly in the first few years.
 
@@ -99,7 +99,7 @@ Age is the most significant factor affecting used car prices, and its impact is 
 
 **Possible Appreciation:** Very old vehicles (e.g. classics) show signs of price increase, likely due to collector demand.
 
-The scatter plot supports this behavior, validating the inclusion of age² in the model and reflecting real-world pricing dynamics.
+The scatter plot supports this behavior, validating the inclusion of `age^2` in the model and reflecting real-world pricing dynamics.
 
 ![Car Price Age Relationship](images/car_price_vs_age.jpg)
 

@@ -85,23 +85,24 @@ The chart below visualizes the coefficients for each feature. The length of each
 * **The "Price Boosters":** Conversely, certain vehicle types and conditions have a strong positive effect. For instance, a car's `type_convertible` has a positive coefficient, indicating that these vehicles command a premium in the used car market.
 * **The Non-Linear Story:** The presence of both `age` and `age^2` with opposing coefficients perfectly captures the non-linear depreciation curve, showing a sharp initial drop in value that flattens out over time.
 
-![Key Pricing Factors](images/vehicles_price_affecting_features.jpg)
+![Key Pricing Factors](images/vehicles_price_affecting_features.png)
 
 ***
 
-### Age: The Relationship to Price
+### Age vs. Price: A Non-Linear Relationship
 
-Age is the single most influential factor in a vehicle's price, and the relationship is a non-linear one. A simple linear model would fail to accurately capture the true dynamics of automotive depreciation. To address this, the model incorporates a quadratic term (`age^2`), which allows it to model a more complex and realistic depreciation curve.
+Age is the most significant factor affecting used car prices, and its impact is non-linear. To model this accurately, a quadratic term (age²) was included, capturing the true shape of the depreciation curve.
 
-The scatter plot below visually demonstrates this relationship and provides validation for the model's structure.
+**Rapid Early Depreciation:** New cars lose value quickly in the first few years.
 
-* **Initial Depreciation:** For new vehicles, a steep decline in price is observed. This rapid depreciation is common in the automotive market, as vehicles lose significant value in their first few years of service.
-* **Decelerating Depreciation:** As a vehicle ages, the rate of depreciation decelerates, and the price curve begins to flatten. This indicates that older vehicles lose value at a slower rate than newer ones.
-* **Appreciation for Vintage Vehicles:** For the oldest segment of the data, the model correctly identifies a subtle positive trend. This phenomenon is likely due to the presence of classic and collector's cars, which can appreciate in value over time.
+**Slowing Depreciation Over Time:** As cars age, their value declines more slowly.
 
-This analysis not only confirms the validity of the `age^2` feature but also provides a clear, data-driven explanation of the complex relationship between a vehicle's age and its market price.
+**Possible Appreciation:** Very old vehicles (e.g. classics) show signs of price increase, likely due to collector demand.
+
+The scatter plot supports this behavior, validating the inclusion of age² in the model and reflecting real-world pricing dynamics.
 
 ![Car Price Age Relationship](images/car_price_vs_age.jpg)
+
 ---
 ## Recommendations for the Dealership
 

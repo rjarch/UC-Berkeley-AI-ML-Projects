@@ -1,85 +1,93 @@
-# 🚗 Toyota Model Matchmaker: AI-Driven Customer Profiling
+# 🚗 Capstone Project: Predicting Toyota Vehicle Purchases
 
-#### Executive Summary
-The **Toyota Model Matchmaker** is a machine learning-powered system designed to predict the most suitable vehicle for a potential customer based on their unique lifestyle and financial profile. By evolving through three strategic phases—Baseline, Strategic Rebalancing, and Behavioral Feature Engineering—the system successfully resolved majority-class bias to identify niche buyers.
-
-In testing, the final **Tuned CatBoost** model achieved a **96% accuracy rate** and a **96% Macro F1-Score**, transforming the traditional "guessing game" of sales into a surgical, data-driven diagnostic tool.
+**Author:** Archana Rajadnya  
+**Course:** UC Berkeley – AI & Machine Learning
 
 ---
 
-### **1. Problem Statement**
-Automotive dealerships often struggle with "mismatched" leads—where customers are shown vehicles that don't fit their budget or daily utility needs. This leads to longer sales cycles and lower customer satisfaction.
-
-**Our Goal:** To build a predictive engine that can instantly profile a customer and suggest the most compatible Toyota model.
-* **Challenges:** Capturing the "hidden" logic of why someone chooses a niche model (like a Tacoma or Prius) over a high-volume SUV (like a RAV4).
-* **Benefits:** Faster sales cycles, optimized inventory management, and personalized marketing.
+### 📌 Executive Summary
+This project explores customer demographic, financial, and behavioral data to predict which Toyota vehicle model a customer is most likely to purchase. By analyzing factors such as income, family size, and commuting habits, the system provides a data-driven diagnostic tool to assist dealerships. In testing, the final **Tuned CatBoost** model achieved a **96% accuracy rate**, transforming traditional inventory planning into a personalized, predictive process.
 
 ---
 
-### **2. The Data (Our Ingredients)**
-We used a dataset representing 50,000 potential buyers. To make the model smarter, we moved beyond raw data to create **Behavioral Proxies**:
-
-* **Affordability Index:** A calculated ratio of income to vehicle cost.
-* **Utility Scores:** Combining family size and commute distance to see if a user *actually* needs an SUV.
-* **Lifestyle Indicators:** Mapping "Urban" vs. "Rural" living to specific vehicle categories (e.g., trucks for rural, hybrids for urban).
-
----
-
-### **3. Methodology (How it Works)**
-We approached this as a **Supervised Classification** problem, comparing three distinct architectures to find the "Gold Standard" solution.
-
-1.  **Exploration:** We identified that income and family size were the strongest predictors of vehicle choice.
-2.  **Strategic Rebalancing:** We intentionally addressed class imbalance to ensure niche models (Tacoma, Prius) received equal predictive weight.
-3.  **Model Selection:** We compared multiple "AI experts" (algorithms):
-    * **Baseline:** Random Forest (88% Accuracy, but biased toward majority classes).
-    * **Advanced:** **CatBoost (Champion)**, which achieved elite precision by handling categorical interaction features natively.
+### 🎯 Problem Statement
+Automotive dealerships often struggle with "mismatched" leads where customers are shown vehicles that do not fit their budget or daily utility needs. This leads to longer sales cycles and lower customer satisfaction.  
+* **Goal:** Build a predictive engine to instantly profile customers and suggest the most compatible Toyota model.
+* **Challenges:** Capturing the "hidden" logic of why a buyer chooses one segment over another.
+* **Benefits:** Faster sales, optimized inventory management, and personalized marketing.
 
 ---
 
-### **4. Results & Findings**
-
-#### **🏆 Final Model Tournament Results**
-| Metric | Random Forest (Baseline) | XGBoost (Final) | **CatBoost (Tuned Champion)** |
-| :--- | :---: | :---: | :---: |
-| **Global Accuracy** | 88.00% | 96.00% | **96.00%** |
-| **Macro F1-Score** | 0.87 | 0.96 | **0.96** |
-| **Tacoma Precision** | 0.95 | 0.98 | **1.00 (Perfect)** |
-| **Highlander F1-Score**| 0.94 | 0.97 | **0.98** |
-
-* **High Precision:** The model reached a **96% F1-Score**, meaning it is extremely reliable at distinguishing between similar models.
-
-    ![Confusion Matrix](./images/confusion_matrix.png)
-    *Figure 1: Confusion Matrix showing the high accuracy of predictions across all vehicle models.*
-
-* **Key Drivers:** We discovered that our engineered **Affordability Index** and **SUV Affinity** scores were significantly more important than age or simple occupation when predicting a purchase.
-
-    ![Feature Importance](./images/catboost_feature_importance.png)
-    *Figure 2: This plot illustrates the dominance of engineered behavioral signals over raw demographic data.*
-
-* **The "Top-K" Strategy:** Instead of giving just one answer, the system provides the **Top 3** choices. This mimics a real conversation with a sales expert, offering options while staying within the user's "compatibility zone."
+### ❓ Model Outcomes & Predictions
+* **Learning Type:** Supervised Learning.
+* **Problem Type:** Multi-Class Classification.
+* **Expected Output:** Identification of the correct vehicle segment (Camry, Corolla, RAV4, Prius, Tacoma, Highlander).
 
 ---
 
-### **5. Next Steps & Recommendations**
-To take this from a Capstone project to a real-world dealership tool, we recommend:
-1.  **Integration with CRM:** Connect this tool to dealership websites so customers can "Find their Match" before walking onto the lot.
-2.  **Real-Time Inventory Sync:** Link the model to current stock. If the #1 choice is out of stock, the system should automatically pivot to the #2 choice.
-3.  **Customer Feedback Loop:** Use real sales outcomes to "retrain" the model every month, allowing it to adapt to changing market trends.
+### 📊 Data Acquisition
+The dataset represents 50,000 potential buyers and includes demographic, financial, and behavioral data. Data was analyzed across multiple dimensions to ensure a clear path to solving the classification problem.
+
+![Missing Values](./images/missing_values_per_column.png)  
+*Figure 1: Visualization assessing data potential by checking for consistency and completeness.*
 
 ---
 
-### **6. How to Run the Project**
-For technical reviewers who wish to test the live application:
-
-1.  **The Live Interface (Streamlit):**
-    * Start the UI by running `streamlit run app.py` in your terminal.
-    * Access it via your web browser, typically at `http://localhost:8501`.
-
-    ![Streamlit UI](./images/sample_prediction_ui.png)
-    *Figure 4: The interactive Streamlit dashboard where users receive recommendations.*
-
-2.  **The API Backend (FastAPI):**
-    * Ensure the backend is running by executing `python main.py` in a separate terminal.
-    * Access the interactive API documentation at `http://127.0.0.1:8000/docs`.
+### 🧹 Data Preprocessing & Preparation
+To ensure the data was model-ready, the following techniques were applied:
+* **Cleaning:** Removal of duplicate records and statistical imputation were used to ensure the data was free of missing values and inconsistencies.
+* **Encoding:** Categorical variables were transformed using appropriate encoding steps for machine learning compatibility.
+* **Data Splitting:** The processed data was split into **Training** and **Test** sets to validate model performance on unseen data.
 
 ---
+
+### 🔍 Exploratory Data Analysis (EDA)
+EDA was conducted to identify feature distributions and relationships between variables.
+
+![Vehicle Models Distribution](./images/vehicle_models.png)  
+*Figure 2: Distribution of vehicle categories across the primary dataset.*
+
+![Income vs Vehicle Type](./images/income_vs_vehicle_models.png)  
+*Figure 3: Income distribution trends demonstrating financial separation between models.*
+
+---
+
+### 🤖 Modeling
+The project evaluated several machine learning algorithms to address the problem statement:
+* **Baseline:** Simple decision rules and Random Forest.
+* **Champion Model:** **CatBoost**, selected for its superior ability to handle complex relationships between categorical and numerical features.
+
+---
+
+### 📈 Model Evaluation
+Multiple models, including classification and tree-based algorithms, were considered.
+* **Metrics:** Accuracy and **Macro F1-Score** were the primary metrics used to determine the most optimal model.
+* **Results:** The Tuned CatBoost model achieved a **96% F1-Score**, showing extreme reliability in distinguishing between similar models.
+
+![Feature Importance](./images/feature_importance.png)  
+*Figure 4: Key drivers identified by the optimal model, showing the high impact of the Affordability Index.*
+
+![Baseline Confusion Matrix](./images/confusion_matrix_baseline_model.png)  
+*Figure 5: Evaluation of the baseline model performance across vehicle segments.*
+
+---
+
+### 🚀 Live Interface & API
+The project includes a user-friendly interface and a robust API for real-world deployment.
+
+#### **Streamlit Dashboard**
+The interactive UI allows sales teams to input customer profiles and receive a "Top 3" list of recommendations.
+
+![Toyota Matchmaker UI](./images/Toyota_Model_Matchmaker_UI.jpg)
+*Figure 6: The live Streamlit application interface.*
+
+#### **FastAPI Backend**
+The backend API enables raw predictions and integration with existing dealership CRMs.
+
+![FastAPI Documentation](./images/Toyota_Model_Matchmaker_API.jpg)
+*Figure 7: The FastAPI Swagger documentation for raw model predictions.*
+
+---
+
+##### Contact and Further Information
+**Archana Rajadnya** 
